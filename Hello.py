@@ -1,49 +1,42 @@
-# Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022)
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import streamlit as st
-from streamlit.logger import get_logger
+#import tensorflow as tf
+from transformers import RobertaTokenizer
+import pandas as pd
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
-LOGGER = get_logger(__name__)
+# Affichage d'un échantillon des données
+st.title("Projet 10 : Détectez les Bad Buzz grâce au Deep Learning")
+
+# Charger les données
+path = "https://github.com/SaraSarahB/Projet10/MyData.csv"
+data = pd.read_csv(path, encoding='ISO-8859-1')
 
 
-def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
+st.subheader("Présentation des données Data")
+st.dataframe(Data.sample(5))
+# Affichage de la forme des données (nombre de lignes et de colonnes)
+st.write("Data.shape :", Data.shape)
 
-    st.write("# Welcome to Streamlit! 👋")
+# Création du graphique de distribution de la colonne 'target'
+st.subheader("Compteur de distribution de target")
+sns.set(style="whitegrid")
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.countplot(data=Data, x='target', palette='Set1', ax=ax)
+plt.xlabel("Target")
+plt.ylabel("Count")
+plt.xticks(rotation=45)
+st.pyplot(fig)
 
-    st.sidebar.success("Select a demo above.")
+# Exécution de l'application Streamlit
+if __name__ == "__main__":
+    st.sidebar.title("Paramètres")
+    st.sidebar.write("Personnalisez les paramètres ici, si nécessaire.")
 
-    st.markdown(
-        """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
-    """
+
+
+
+
     )
 
 
