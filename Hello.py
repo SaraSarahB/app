@@ -34,11 +34,5 @@ if __name__ == "__main__":
     st.sidebar.write("Personnalisez les paramètres ici, si nécessaire.")
 
 
-
-
-
-    )
-
-
 if __name__ == "__main__":
     run()
